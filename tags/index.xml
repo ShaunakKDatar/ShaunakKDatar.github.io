@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on The SKD Blog</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on The SKD Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 11 Jun 2025 21:42:22 +0530</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bare-Metal</title>
+      <link>/tags/bare-metal/</link>
+      <pubDate>Wed, 11 Jun 2025 21:42:22 +0530</pubDate>
+      
+      <guid>/tags/bare-metal/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>GSoC</title>
+      <link>/tags/gsoc/</link>
+      <pubDate>Wed, 11 Jun 2025 21:42:22 +0530</pubDate>
+      
+      <guid>/tags/gsoc/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>Raspberry Pi</title>
+      <link>/tags/raspberry-pi/</link>
+      <pubDate>Wed, 11 Jun 2025 21:42:22 +0530</pubDate>
+      
+      <guid>/tags/raspberry-pi/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>RTEMS</title>
+      <link>/tags/rtems/</link>
+      <pubDate>Wed, 11 Jun 2025 21:42:22 +0530</pubDate>
+      
+      <guid>/tags/rtems/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+  </channel>
+</rss>
