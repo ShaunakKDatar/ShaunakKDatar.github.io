@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Bits to BSPs – GSoC Midterm Recap :: The SKD Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A midterm progress report on my GSoC 2025 project with RTEMS, detailing the work done so far and what lies ahead." />
+<meta name="keywords" content="GSoC 2025, RTEMS BSP, Raspberry Pi 4B, RTEMS device driver, I2C PWM DMA Mailbox RTEMS, Shaunak Datar GSoC" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="../../posts/gsoc-midterm-deliverables/" />
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="../../styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="../../images/blogfavicon.ico">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Bits to BSPs – GSoC Midterm Recap">
+<meta property="og:description" content="A midterm progress report on my GSoC 2025 project with RTEMS, detailing the work done so far and what lies ahead." />
+<meta property="og:url" content="/posts/gsoc-midterm-deliverables/" />
+<meta property="og:site_name" content="The SKD Blog" />
+
+  
+  
+  <meta property="og:image" content="/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-06-25 00:48:25 &#43;0530 IST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+</head>
+<body class="blue">
+
+
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="../../">
+  <div class="logo">
+    shaunak@datar:~$
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="../../posts">Posts</a></li>
+        
+      
+        
+          <li><a href="../../about">About</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+      
+        
+          <li><a href="../../posts" >Posts</a></li>
+        
+      
+        
+          <li><a href="../../about" >About</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="../../posts/gsoc-midterm-deliverables/">Bits to BSPs – GSoC Midterm Recap</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-06-25</time>
+    
+</div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="../../tags/rtems/">RTEMS</a>&nbsp;
+      
+      #<a href="../../tags/gsoc/">GSoC</a>&nbsp;
+      
+      #<a href="../../tags/raspberry-pi/">Raspberry Pi</a>&nbsp;
+      
+      #<a href="../../tags/bare-metal/">Bare-metal</a>&nbsp;
+      
+      #<a href="../../tags/device-drivers/">Device-Drivers</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+
+  
+
+  <div class="post-content"><div>
+        <p>Hello readers!</p>
+<p>We’re about four weeks into GSoC 2025, and it&rsquo;s been an incredible ride so far. I&rsquo;m thrilled to be working with the RTEMS Project this summer. In this post, I want to walk you through what I’ve been working on, what’s already done, and what’s coming up before the midterm evaluations.</p>
+<hr>
+<h2 id="what-am-i-going-to-talk-about">What am I going to talk about?<a href="#what-am-i-going-to-talk-about" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<ul>
+<li>What project am I working on for GSoC 2025?</li>
+<li>What have I accomplished so far?</li>
+<li>What do I plan to complete before midterm evaluations?</li>
+</ul>
+<hr>
+<h2 id="the-project">The Project<a href="#the-project" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>I&rsquo;m contributing to the project:<br>
+<strong><a href="https://summerofcode.withgoogle.com/programs/2025/projects/CUL4f3Nh">Adding I2C, PWM, DMA and Mailbox Support to the Raspberry Pi 4B BSP in RTEMS</a></strong></p>
+<p>As the title suggests, the goal is to implement and upstream support for the following peripherals in the Raspberry Pi 4B Board Support Package (BSP) for RTEMS:</p>
+<ul>
+<li>I2C</li>
+<li>PWM</li>
+<li>Mailbox</li>
+<li>DMA</li>
+</ul>
+<h3 id="why-these-peripherals">Why these peripherals?<a href="#why-these-peripherals" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>There are two perspectives here:</p>
+<p><strong>One</strong>, I2C and PWM are fundamental interfaces. Many BSPs already support them – for example, I2C in <a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/tree/main/bsps/arm/raspberrypi/i2c">arm/raspberrypi</a> and PWM in <a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/tree/main/bsps/arm/beagle/pwm">arm/beagle</a>.<br>
+<strong>Two</strong>, DMA and Mailbox are essential for enabling SDHCI support, which was a pending item from last year’s RTEMS efforts.</p>
+<p>A more personal reason: I2C and PWM are what powered the self-balancing feature of the <a href="https://github.com/SRA-VJTI/Wall-E">Wall-E robot from SRA</a>. I first learned about them back in my first year at college, taught First Year students about this robot in my second year — and now, getting to implement them at RTEMS feels increadibly fulfilling.</p>
+<hr>
+<h2 id="work-done-so-far">Work Done So Far<a href="#work-done-so-far" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>These weeks have flown by! I&rsquo;ve written and debugged a lot of code, fixed formatting issues, and had two merge requests accepted. It’s been a fast-paced journey, and I’m incredibly grateful to my mentors, Christian and Kinsey, for their guidance and quick feedback.</p>
+<h3 id="whats-been-merged">What’s been merged?<a href="#whats-been-merged" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<ul>
+<li>
+<p>✅ <strong>PWM Driver for Raspberry Pi 4B</strong>:<br>
+<a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/commit/d4755476bcc95c1a1864fa20c1fc7255f509074a">Merged Commit</a><br>
+The driver allows users to configure both PWM controllers (PWM0 and PWM1) and their respective channels. A detailed blog post on usage and design is on the way—stay tuned!</p>
+</li>
+<li>
+<p>✅ <strong>Formatting fixes</strong> for the BSP header:<br>
+<a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/commit/1c9e91d25bdc7175a41b88c306d7ed03697dc66f#f6733755e37b7dc68c7ae64c1e9ec3e1b8a19511">raspberrypi.h</a></p>
+</li>
+</ul>
+<h3 id="other-contributions">Other Contributions<a href="#other-contributions" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<ul>
+<li>Re-tested the I2C driver and handled an edge case involving 0-length transfers.</li>
+<li>Started digging into the DMA controller documentation to prep for the next phase.</li>
+</ul>
+<hr>
+<h2 id="plan-before-midterm-evaluations">Plan Before Midterm Evaluations<a href="#plan-before-midterm-evaluations" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>After syncing up with my mentors, here’s what we’ve decided as the midterm deliverables:</p>
+<ul>
+<li><input disabled="" type="checkbox"> I2C driver merged upstream</li>
+<li><input checked="" disabled="" type="checkbox"> PWM driver merged upstream</li>
+<li><input disabled="" type="checkbox"> Significant progress on either DMA or Mailbox support</li>
+</ul>
+<p>The PWM work is done and upstream. I2C works well too — I’m just wrapping up some formatting and quality improvements. Meanwhile, I’ve started exploring the DMA peripheral and will be diving into implementation soon.</p>
+<p>With 2–3 weeks left until evaluations, I&rsquo;m focused and hopeful. Let’s keep building and contributing to this wonderful ecosystem called <strong>open source</strong>.</p>
+<hr>
+<p>That’s it for now — but there’s a lot more coming soon!<br>
+If you’re into embedded systems, RTEMS, or just love geeking out over low-level stuff, I’d love to chat. Feel free to reach out anytime!</p>
+<p>Until next time — keep building, keep tinkering, and keep contributing.</p>
+<p>Cheers,<br>
+Shaunak</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="../../posts/running-rtems-on-raspberrypi4b/">
+                <span class="button__text">Running RTEMS on Raspberry Pi 4B</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/mirus-ua/hugo-theme-re-terminal" target="_blank">Theme</a> made by <a href="https://github.com/mirus-ua" target="_blank">Mirus</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="../../bundle.min.js"></script>
+
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

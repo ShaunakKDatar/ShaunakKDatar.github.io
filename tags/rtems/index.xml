@@ -6,7 +6,90 @@
     <description>Recent content in RTEMS on The SKD Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 11 Jun 2025 21:42:22 +0530</lastBuildDate><atom:link href="/tags/rtems/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 Jun 2025 00:48:25 +0530</lastBuildDate><atom:link href="/tags/rtems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bits to BSPs – GSoC Midterm Recap</title>
+      <link>/posts/gsoc-midterm-deliverables/</link>
+      <pubDate>Wed, 25 Jun 2025 00:48:25 +0530</pubDate>
+      
+      <guid>/posts/gsoc-midterm-deliverables/</guid>
+      <description>&lt;p&gt;Hello readers!&lt;/p&gt;
+&lt;p&gt;We’re about four weeks into GSoC 2025, and it&amp;rsquo;s been an incredible ride so far. I&amp;rsquo;m thrilled to be working with the RTEMS Project this summer. In this post, I want to walk you through what I’ve been working on, what’s already done, and what’s coming up before the midterm evaluations.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;what-am-i-going-to-talk-about&#34;&gt;What am I going to talk about?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;What project am I working on for GSoC 2025?&lt;/li&gt;
+&lt;li&gt;What have I accomplished so far?&lt;/li&gt;
+&lt;li&gt;What do I plan to complete before midterm evaluations?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;the-project&#34;&gt;The Project&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m contributing to the project:&lt;br&gt;
+&lt;strong&gt;&lt;a href=&#34;https://summerofcode.withgoogle.com/programs/2025/projects/CUL4f3Nh&#34;&gt;Adding I2C, PWM, DMA and Mailbox Support to the Raspberry Pi 4B BSP in RTEMS&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;</description>
+      <content>&lt;p&gt;Hello readers!&lt;/p&gt;
+&lt;p&gt;We’re about four weeks into GSoC 2025, and it&amp;rsquo;s been an incredible ride so far. I&amp;rsquo;m thrilled to be working with the RTEMS Project this summer. In this post, I want to walk you through what I’ve been working on, what’s already done, and what’s coming up before the midterm evaluations.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;what-am-i-going-to-talk-about&#34;&gt;What am I going to talk about?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;What project am I working on for GSoC 2025?&lt;/li&gt;
+&lt;li&gt;What have I accomplished so far?&lt;/li&gt;
+&lt;li&gt;What do I plan to complete before midterm evaluations?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;the-project&#34;&gt;The Project&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m contributing to the project:&lt;br&gt;
+&lt;strong&gt;&lt;a href=&#34;https://summerofcode.withgoogle.com/programs/2025/projects/CUL4f3Nh&#34;&gt;Adding I2C, PWM, DMA and Mailbox Support to the Raspberry Pi 4B BSP in RTEMS&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As the title suggests, the goal is to implement and upstream support for the following peripherals in the Raspberry Pi 4B Board Support Package (BSP) for RTEMS:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I2C&lt;/li&gt;
+&lt;li&gt;PWM&lt;/li&gt;
+&lt;li&gt;Mailbox&lt;/li&gt;
+&lt;li&gt;DMA&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;why-these-peripherals&#34;&gt;Why these peripherals?&lt;/h3&gt;
+&lt;p&gt;There are two perspectives here:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;One&lt;/strong&gt;, I2C and PWM are fundamental interfaces. Many BSPs already support them – for example, I2C in &lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/tree/main/bsps/arm/raspberrypi/i2c&#34;&gt;arm/raspberrypi&lt;/a&gt; and PWM in &lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/tree/main/bsps/arm/beagle/pwm&#34;&gt;arm/beagle&lt;/a&gt;.&lt;br&gt;
+&lt;strong&gt;Two&lt;/strong&gt;, DMA and Mailbox are essential for enabling SDHCI support, which was a pending item from last year’s RTEMS efforts.&lt;/p&gt;
+&lt;p&gt;A more personal reason: I2C and PWM are what powered the self-balancing feature of the &lt;a href=&#34;https://github.com/SRA-VJTI/Wall-E&#34;&gt;Wall-E robot from SRA&lt;/a&gt;. I first learned about them back in my first year at college, taught First Year students about this robot in my second year — and now, getting to implement them at RTEMS feels increadibly fulfilling.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;work-done-so-far&#34;&gt;Work Done So Far&lt;/h2&gt;
+&lt;p&gt;These weeks have flown by! I&amp;rsquo;ve written and debugged a lot of code, fixed formatting issues, and had two merge requests accepted. It’s been a fast-paced journey, and I’m incredibly grateful to my mentors, Christian and Kinsey, for their guidance and quick feedback.&lt;/p&gt;
+&lt;h3 id=&#34;whats-been-merged&#34;&gt;What’s been merged?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;✅ &lt;strong&gt;PWM Driver for Raspberry Pi 4B&lt;/strong&gt;:&lt;br&gt;
+&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/commit/d4755476bcc95c1a1864fa20c1fc7255f509074a&#34;&gt;Merged Commit&lt;/a&gt;&lt;br&gt;
+The driver allows users to configure both PWM controllers (PWM0 and PWM1) and their respective channels. A detailed blog post on usage and design is on the way—stay tuned!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;✅ &lt;strong&gt;Formatting fixes&lt;/strong&gt; for the BSP header:&lt;br&gt;
+&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/commit/1c9e91d25bdc7175a41b88c306d7ed03697dc66f#f6733755e37b7dc68c7ae64c1e9ec3e1b8a19511&#34;&gt;raspberrypi.h&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;other-contributions&#34;&gt;Other Contributions&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Re-tested the I2C driver and handled an edge case involving 0-length transfers.&lt;/li&gt;
+&lt;li&gt;Started digging into the DMA controller documentation to prep for the next phase.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;plan-before-midterm-evaluations&#34;&gt;Plan Before Midterm Evaluations&lt;/h2&gt;
+&lt;p&gt;After syncing up with my mentors, here’s what we’ve decided as the midterm deliverables:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; I2C driver merged upstream&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; PWM driver merged upstream&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Significant progress on either DMA or Mailbox support&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The PWM work is done and upstream. I2C works well too — I’m just wrapping up some formatting and quality improvements. Meanwhile, I’ve started exploring the DMA peripheral and will be diving into implementation soon.&lt;/p&gt;
+&lt;p&gt;With 2–3 weeks left until evaluations, I&amp;rsquo;m focused and hopeful. Let’s keep building and contributing to this wonderful ecosystem called &lt;strong&gt;open source&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;That’s it for now — but there’s a lot more coming soon!&lt;br&gt;
+If you’re into embedded systems, RTEMS, or just love geeking out over low-level stuff, I’d love to chat. Feel free to reach out anytime!&lt;/p&gt;
+&lt;p&gt;Until next time — keep building, keep tinkering, and keep contributing.&lt;/p&gt;
+&lt;p&gt;Cheers,&lt;br&gt;
+Shaunak&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>Running RTEMS on Raspberry Pi 4B</title>
       <link>/posts/running-rtems-on-raspberrypi4b/</link>
