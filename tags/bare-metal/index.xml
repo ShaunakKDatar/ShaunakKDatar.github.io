@@ -75,11 +75,11 @@ The driver allows users to configure both PWM controllers (PWM0 and PWM1) and th
 &lt;h2 id=&#34;plan-before-midterm-evaluations&#34;&gt;Plan Before Midterm Evaluations&lt;/h2&gt;
 &lt;p&gt;After syncing up with my mentors, here’s what we’ve decided as the midterm deliverables:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; I2C driver merged upstream&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; I2C driver merged upstream&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; PWM driver merged upstream&lt;/li&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Significant progress on either DMA or Mailbox support&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The PWM work is done and upstream. I2C works well too — I’m just wrapping up some formatting and quality improvements. Meanwhile, I’ve started exploring the DMA peripheral and will be diving into implementation soon.&lt;/p&gt;
+&lt;p&gt;The PWM and I2C work has been throughly tested and upstreamed. I have started work on implementing the DMA controller.&lt;/p&gt;
 &lt;p&gt;With 2–3 weeks left until evaluations, I&amp;rsquo;m focused and hopeful. Let’s keep building and contributing to this wonderful ecosystem called &lt;strong&gt;open source&lt;/strong&gt;.&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;That’s it for now — but there’s a lot more coming soon!&lt;br&gt;
