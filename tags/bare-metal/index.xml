@@ -6,7 +6,61 @@
     <description>Recent content in Bare-Metal on The SKD Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 25 Jun 2025 00:48:25 +0530</lastBuildDate><atom:link href="/tags/bare-metal/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Jul 2025 22:29:25 +0530</lastBuildDate><atom:link href="/tags/bare-metal/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GSoC Midterm evaluation</title>
+      <link>/posts/gsoc-midterm-evaluations/</link>
+      <pubDate>Tue, 15 Jul 2025 22:29:25 +0530</pubDate>
+      
+      <guid>/posts/gsoc-midterm-evaluations/</guid>
+      <description>&lt;p&gt;Hello readers!&lt;/p&gt;
+&lt;p&gt;The GSoC 2025 midterm evaluations are here, and I’d like to take this opportunity to summarize the work I’ve done so far. I’m contributing to the RTEMS Project, focusing on adding and improving peripheral support for the Raspberry Pi 4B BSP. My proposal is centered around four core components: &lt;strong&gt;I2C&lt;/strong&gt;, &lt;strong&gt;PWM&lt;/strong&gt;, &lt;strong&gt;DMA&lt;/strong&gt;, and &lt;strong&gt;Mailbox&lt;/strong&gt;. Out of these, I’ve:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Merged I2C support&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Merged PWM support&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Got DMA working for memory-to-memory transfers&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let’s take a closer look at each component:&lt;/p&gt;</description>
+      <content>&lt;p&gt;Hello readers!&lt;/p&gt;
+&lt;p&gt;The GSoC 2025 midterm evaluations are here, and I’d like to take this opportunity to summarize the work I’ve done so far. I’m contributing to the RTEMS Project, focusing on adding and improving peripheral support for the Raspberry Pi 4B BSP. My proposal is centered around four core components: &lt;strong&gt;I2C&lt;/strong&gt;, &lt;strong&gt;PWM&lt;/strong&gt;, &lt;strong&gt;DMA&lt;/strong&gt;, and &lt;strong&gt;Mailbox&lt;/strong&gt;. Out of these, I’ve:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Merged I2C support&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Merged PWM support&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Got DMA working for memory-to-memory transfers&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let’s take a closer look at each component:&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;i2c&#34;&gt;I2C&lt;/h2&gt;
+&lt;p&gt;The I2C peripheral on the Raspberry Pi is accessed via the &lt;code&gt;i2c_bus&lt;/code&gt; layer in RTEMS&amp;rsquo;s &lt;code&gt;cpukit&lt;/code&gt;. I implemented functions like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;rpi_i2c_transfer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rpi_i2c_set_clock&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rpi_i2c_destroy&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;hellip;along with several helper functions to configure the BSC (Broadcom Serial Controller) registers.&lt;/p&gt;
+&lt;p&gt;I tested the driver using an MPU6050 sensor and verified correct readings. After testing, I raised a &lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/363&#34;&gt;merge request&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Most of my time after the testing phase was spent addressing review comments. This helped me understand how to write code that is not only functional, but also &lt;strong&gt;readable&lt;/strong&gt;, &lt;strong&gt;maintainable&lt;/strong&gt;, and &lt;strong&gt;aligned with RTEMS&amp;rsquo;s coding guidelines&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;pwm&#34;&gt;PWM&lt;/h2&gt;
+&lt;p&gt;The second part of my project involved adding support for the PWM peripheral on the Raspberry Pi 4B. PWM was relatively straightforward, and I spent around two weeks getting it up and running.&lt;/p&gt;
+&lt;p&gt;I implemented functions to initialize the PWM master and individual channels, as well as to update the duty cycle of an already-running channel. Since PWM is tightly coupled with the Clock Manager, I also implemented static helper functions to configure the clock source and dividers.&lt;/p&gt;
+&lt;p&gt;For testing, I wrote a user application that exercised both PWM channels. PWM0 is mapped to GPIOs, so I verified its output using a logic analyzer. PWM1, however, is connected to the audio jack on the Pi. To test this, I configured it to output a 440Hz tone and connected headphones to hear the sound.&lt;/p&gt;
+&lt;p&gt;After testing, I submitted a &lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/509&#34;&gt;merge request&lt;/a&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;dma&#34;&gt;DMA&lt;/h2&gt;
+&lt;p&gt;DMA is the most involving and interesting part of the project so far. Unlike I2C or PWM, it’s not just about configuring registers—it also involves creating a control block, aligning it to a 256-bit address, and setting up memory for source and destination buffers correctly.&lt;/p&gt;
+&lt;p&gt;Initially, I tested DMA with a simple single-integer transfer, which worked fine on QEMU but failed on actual hardware. After discussions with my mentors, I realized the issue was due to cache coherence—the CPU cache was not in sync with memory when the DMA engine performed the transfer.&lt;/p&gt;
+&lt;p&gt;To fix this, I modified the memory allocation to ensure proper cache-line alignment, added manual cache flushes and invalidations using RTEMS APIs, and rewrote the test case to use a larger buffer instead of a single integer. With these changes, the memory-to-memory DMA transfer worked reliably on real hardware.&lt;/p&gt;
+&lt;p&gt;After some restructuring and cleanup, I plan to raise a merge request for DMA support soon.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;This has been my progress till the midterm. It&amp;rsquo;s been super fun working on this project—I’m learning a lot of new things and growing as an embedded engineer.&lt;/p&gt;
+&lt;p&gt;That’s it for now.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Until next time — keep building, keep tinkering, and keep contributing.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Cheers,&lt;br&gt;
+Shaunak&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>Bits to BSPs – GSoC Midterm Recap</title>
       <link>/posts/gsoc-midterm-deliverables/</link>
@@ -82,7 +136,7 @@ The driver allows users to configure both PWM controllers (PWM0 and PWM1) and th
 &lt;p&gt;The PWM and I2C work has been throughly tested and upstreamed. I have started work on implementing the DMA controller.&lt;/p&gt;
 &lt;p&gt;With 2–3 weeks left until evaluations, I&amp;rsquo;m focused and hopeful. Let’s keep building and contributing to this wonderful ecosystem called &lt;strong&gt;open source&lt;/strong&gt;.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;That’s it for now — but there’s a lot more coming soon!&lt;br&gt;
+&lt;p&gt;That’s it for now — but there’s a lot more coming soon!
 If you’re into embedded systems, RTEMS, or just love geeking out over low-level stuff, I’d love to chat. Feel free to reach out anytime!&lt;/p&gt;
 &lt;p&gt;Until next time — keep building, keep tinkering, and keep contributing.&lt;/p&gt;
 &lt;p&gt;Cheers,&lt;br&gt;

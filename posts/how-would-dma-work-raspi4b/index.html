@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>How Would Dma Work Raspi4b :: The SKD Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="&ldquo;Oh my god, why are there so many memory trasnfer for my CPU to handle. This is getting out of hand. The CPU is barely getting any compute time, it is stuck in memory transfers.&rdquo; This is what would happen if we did not have a DMA Controller.
+The good thing about the BCM2711 is it has one. The DMA controller on the BCM2711 is a 16 channel DMA controller. Out of these 16 channels 4 are DMA lite channels(reduced performance and features) and 4 of them are DMA4 channels(better performance and wider address range).
+" />
+<meta name="keywords" content=", " />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/how-would-dma-work-raspi4b/" />
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="//localhost:1313/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="//localhost:1313/images/blogfavicon.ico">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="How Would Dma Work Raspi4b">
+<meta property="og:description" content="&ldquo;Oh my god, why are there so many memory trasnfer for my CPU to handle. This is getting out of hand. The CPU is barely getting any compute time, it is stuck in memory transfers.&rdquo; This is what would happen if we did not have a DMA Controller.
+The good thing about the BCM2711 is it has one. The DMA controller on the BCM2711 is a 16 channel DMA controller. Out of these 16 channels 4 are DMA lite channels(reduced performance and features) and 4 of them are DMA4 channels(better performance and wider address range).
+" />
+<meta property="og:url" content="//localhost:1313/posts/how-would-dma-work-raspi4b/" />
+<meta property="og:site_name" content="The SKD Blog" />
+
+  
+  
+  <meta property="og:image" content="//localhost:1313/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-07-02 15:59:09 &#43;0530 IST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+</head>
+<body class="blue">
+
+
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="../../">
+  <div class="logo">
+    shaunak@datar:~$
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="../../posts">Posts</a></li>
+        
+      
+        
+          <li><a href="../../about">About</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+      
+        
+          <li><a href="../../posts" >Posts</a></li>
+        
+      
+        
+          <li><a href="../../about" >About</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/how-would-dma-work-raspi4b/">How Would Dma Work Raspi4b</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-07-02</time>
+    
+</div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="//localhost:1313/tags/"></a>&nbsp;
+      
+      #<a href="//localhost:1313/tags/"></a>&nbsp;
+      
+    </span>
+  
+  
+
+
+
+  
+
+  <div class="post-content"><div>
+        <p>&ldquo;Oh my god, why are there so many memory trasnfer for my CPU to handle. This is getting out of hand. The CPU is barely getting any compute time, it is stuck in memory transfers.&rdquo; This is what would happen if we did not have a DMA Controller.</p>
+<p>The good thing about the BCM2711 is it has one. The DMA controller on the BCM2711 is a 16 channel DMA controller. Out of these 16 channels 4 are DMA lite channels(reduced performance and features) and 4 of them are DMA4 channels(better performance and wider address range).</p>
+<p>In this blog I will discuss and explain how the DMA controller support will be implemneted in RTEMS for the Raspberry Pi 4b BSP.</p>
+<p>Let&rsquo;s take a step back and understand what information do I need before I can copy a piece of memory from one location to another: I would need a source address, a destination address, the length of the information I want to send. With this information I could just initialise two memory mapped pointers which point to the source address and the destination address and be like:</p>
+<pre tabindex="0"><code>for(int i = 0; i &lt; transfer_length; i++){
+  *dest_pointer = *source_pointer;
+  dest_pointer++;
+  source_pointer++;
+}
+</code></pre><p>The BCM2711&rsquo;s DMA controller takes this information via a structure called the DMA Control Block. The control block is a 32 byte structure which stores information like the transfer information, source address, destination address, next control block&rsquo;s address, etc.</p>
+<p>We will need 2 structures: one structure for the control block, one to specify the dma settings- the channel, the control block pointer.
+The user will call the dma_open_channel function which will return a populated dma structure with the aligned control block pointer and will enable that dma channel raise the reset bit in the channel&rsquo;s corresponding control and status register.
+Once the user has the dma structure they can pass the pointer to that structure in a function called dma_setup_memcpy. This function will take the contents for the control block and load them to the control block register. The function will also set the active bit in the control and status register for that channel.</p>
+<p>After completing all this setup the user will then call the dma_wait on that channel which will return when the active bit for that channel goes low.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="//localhost:1313/posts/gsoc-midterm-deliverables/">
+                <span class="button__text">Bits to BSPs – GSoC Midterm Recap</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/mirus-ua/hugo-theme-re-terminal" target="_blank">Theme</a> made by <a href="https://github.com/mirus-ua" target="_blank">Mirus</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="../../bundle.min.js"></script>
+
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
