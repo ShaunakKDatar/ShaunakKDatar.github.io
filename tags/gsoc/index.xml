@@ -6,7 +6,165 @@
     <description>Recent content in GSoC on The SKD Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 15 Jul 2025 22:29:25 +0530</lastBuildDate><atom:link href="/tags/gsoc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 29 Aug 2025 19:06:32 +0530</lastBuildDate><atom:link href="/tags/gsoc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gsoc Final Work Submission</title>
+      <link>/posts/gsoc-final-work-submission/</link>
+      <pubDate>Fri, 29 Aug 2025 19:06:32 +0530</pubDate>
+      
+      <guid>/posts/gsoc-final-work-submission/</guid>
+      <description>&lt;p&gt;Project Proposal: &lt;a href=&#34;https://docs.google.com/document/d/1NreikYpimpCXKtAVqa8RMzbgOyQgtGw7x1CQlPVAtJY/edit?usp=sharing&#34;&gt;https://docs.google.com/document/d/1NreikYpimpCXKtAVqa8RMzbgOyQgtGw7x1CQlPVAtJY/edit?usp=sharing&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Gitlab Activity: &lt;a href=&#34;https://gitlab.rtems.org/users/skdatar/activity&#34;&gt;https://gitlab.rtems.org/users/skdatar/activity&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Project Issue: &lt;a href=&#34;https://gitlab.rtems.org/rtems/programs/gsoc/-/issues/81&#34;&gt;https://gitlab.rtems.org/rtems/programs/gsoc/-/issues/81&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;code-contribution-list&#34;&gt;Code contribution list:&lt;/h1&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Merge Request&lt;/th&gt;
+          &lt;th&gt;Description&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/363&#34;&gt;I2C (Polling)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Implemented polling-based I2C driver.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/682&#34;&gt;I2C (Interrupt)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Added TX interrupt support for I2C.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/509&#34;&gt;PWM Support&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Implemented PWM driver, tested with logic analyzer &amp;amp; audio jack.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/662&#34;&gt;DMA Support&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Added standard DMA, DMA Lite &amp;amp; DMA4 support (memory-to-memory).&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/178&#34;&gt;Docs (PWM)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Documentation for PWM driver.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/186&#34;&gt;Docs (DMA)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Documentation for DMA driver.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/665&#34;&gt;Header Guards&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Added C++ header guards to BSP header files.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/526&#34;&gt;Formatting Fix (raspberrypi.h)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Fixed formatting issues in &lt;code&gt;include/bsp/raspberrypi.h&lt;/code&gt;.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/190&#34;&gt;Docs (I2C)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Documentation for I2C driver.&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;aim-of-the-project&#34;&gt;Aim of the project&lt;/h1&gt;
+&lt;p&gt;The project aimed to have the support for I2C, PWM, DMA and Mailbox added to the Raspberry Pi 4b BSP.&lt;/p&gt;</description>
+      <content>&lt;p&gt;Project Proposal: &lt;a href=&#34;https://docs.google.com/document/d/1NreikYpimpCXKtAVqa8RMzbgOyQgtGw7x1CQlPVAtJY/edit?usp=sharing&#34;&gt;https://docs.google.com/document/d/1NreikYpimpCXKtAVqa8RMzbgOyQgtGw7x1CQlPVAtJY/edit?usp=sharing&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Gitlab Activity: &lt;a href=&#34;https://gitlab.rtems.org/users/skdatar/activity&#34;&gt;https://gitlab.rtems.org/users/skdatar/activity&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Project Issue: &lt;a href=&#34;https://gitlab.rtems.org/rtems/programs/gsoc/-/issues/81&#34;&gt;https://gitlab.rtems.org/rtems/programs/gsoc/-/issues/81&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;code-contribution-list&#34;&gt;Code contribution list:&lt;/h1&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Merge Request&lt;/th&gt;
+          &lt;th&gt;Description&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/363&#34;&gt;I2C (Polling)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Implemented polling-based I2C driver.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/682&#34;&gt;I2C (Interrupt)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Added TX interrupt support for I2C.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/509&#34;&gt;PWM Support&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Implemented PWM driver, tested with logic analyzer &amp;amp; audio jack.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/662&#34;&gt;DMA Support&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Added standard DMA, DMA Lite &amp;amp; DMA4 support (memory-to-memory).&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/178&#34;&gt;Docs (PWM)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Documentation for PWM driver.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/186&#34;&gt;Docs (DMA)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Documentation for DMA driver.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/665&#34;&gt;Header Guards&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Added C++ header guards to BSP header files.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/526&#34;&gt;Formatting Fix (raspberrypi.h)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Fixed formatting issues in &lt;code&gt;include/bsp/raspberrypi.h&lt;/code&gt;.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/190&#34;&gt;Docs (I2C)&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;Documentation for I2C driver.&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;aim-of-the-project&#34;&gt;Aim of the project&lt;/h1&gt;
+&lt;p&gt;The project aimed to have the support for I2C, PWM, DMA and Mailbox added to the Raspberry Pi 4b BSP.&lt;/p&gt;
+&lt;h2 id=&#34;i2c-support&#34;&gt;I2C Support&lt;/h2&gt;
+&lt;p&gt;The I2C support was upstreamed in two separate MRs. One which implemented the Polling version.
+Another which added the TX Interrupt support to the driver.&lt;/p&gt;
+&lt;p&gt;I2C was tested on the MPU6050 as well as the logic analyser&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/MPU6050_I2C.png&#34; alt=&#34;MPU6050 using I2C&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../images/I2C_LA.jpeg&#34; alt=&#34;I2C on Logic analyser&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Polling Merge Request: &lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/363&#34;&gt;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/363&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Interrupt Merge Request: &lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/682&#34;&gt;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/682&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;pwm-support&#34;&gt;PWM Support&lt;/h2&gt;
+&lt;p&gt;The PWM support was added and was tested using a logic analyser
+&lt;img src=&#34;../../images/PWM_Output.jpeg&#34; alt=&#34;PWM Testing Output&#34;&gt;&lt;/p&gt;
+&lt;p&gt;PWM1_x channels are routed to the audio jack. PWM1 was then tested using the Audio Output on the RaspberryPi&lt;/p&gt;
+&lt;p&gt;PWM Merge Request: &lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/509&#34;&gt;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/509&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;dma-support&#34;&gt;DMA Support&lt;/h2&gt;
+&lt;p&gt;The DMA Support was a very interesting part. During the coding period I could
+complete the memory-to-memory transfer.
+It involved a lot of cache management and handling control block structures.&lt;/p&gt;
+&lt;p&gt;Apart for the standard DMA there are two other types of DMA: DMA Lite and DMA4&lt;/p&gt;
+&lt;p&gt;All of these were tested for memory-to-memory transfer.&lt;/p&gt;
+&lt;p&gt;The standard DMA test:
+&lt;img src=&#34;../../images/DMA-std.png&#34; alt=&#34;DMA Testing&#34;&gt;&lt;/p&gt;
+&lt;p&gt;DMA Lite test:
+&lt;img src=&#34;../../images/DMA-Lite.png&#34; alt=&#34;DMA Lite Testing&#34;&gt;&lt;/p&gt;
+&lt;p&gt;DMA4 test:
+&lt;img src=&#34;../../images/DMA4.png&#34; alt=&#34;DMA4 Testing&#34;&gt;&lt;/p&gt;
+&lt;p&gt;DMA Merge Request: &lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/662&#34;&gt;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/662&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;mailbox-support&#34;&gt;Mailbox Support&lt;/h2&gt;
+&lt;p&gt;Preliminary work on the Mailbox was started, though not completed in the coding period.&lt;/p&gt;
+&lt;h2 id=&#34;other-merged-mrs&#34;&gt;Other Merged MRs&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/186&#34;&gt;Documentation for DMA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/178&#34;&gt;Documentation for PWM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/665&#34;&gt;Adding C++ header guards for the BSPs header files&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/526&#34;&gt;Fix the formatting for the include/bsp/raspberrypi.h file&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/190&#34;&gt;Documentation for I2C&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;future-work&#34;&gt;Future Work&lt;/h1&gt;
+&lt;p&gt;There is considerable work to be done on the Raspberry Pi BSP. The support for Mailbox is incomplete,
+the sdhci support from GSoC 2024 still remains to be completed. The BSP could also use support for Ethernet and USB.&lt;/p&gt;
+&lt;p&gt;I plan to continue working on the Raspberry Pi BSP in particular with RTEMS in general.&lt;/p&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;The time I dedicated to working on the Raspberry Pi BSP, helped me gain a deeper understanding
+of the architecture and the hardware. It sharpened my coding skills, helped me understand open-source.
+I would like to thank my mentor: Kinsey and Christian for putting in the time and effort, helping me understand good coding practices, understand the intricacies of the hardware and reviewing my MRs.
+A huge thank you to Google for connecting students and contributors like me to organisations like RTEMS.&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>GSoC Midterm evaluation</title>
       <link>/posts/gsoc-midterm-evaluations/</link>

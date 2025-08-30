@@ -3,30 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/tags/bare-metal/</loc>
-    <lastmod>2025-07-15T22:29:25+05:30</lastmod>
+    <lastmod>2025-08-29T19:06:32+05:30</lastmod>
   </url><url>
     <loc>/tags/device-drivers/</loc>
-    <lastmod>2025-07-15T22:29:25+05:30</lastmod>
+    <lastmod>2025-08-29T19:06:32+05:30</lastmod>
   </url><url>
     <loc>/tags/gsoc/</loc>
-    <lastmod>2025-07-15T22:29:25+05:30</lastmod>
+    <lastmod>2025-08-29T19:06:32+05:30</lastmod>
   </url><url>
-    <loc>/posts/gsoc-midterm-evaluations/</loc>
-    <lastmod>2025-07-15T22:29:25+05:30</lastmod>
+    <loc>/posts/gsoc-final-work-submission/</loc>
+    <lastmod>2025-08-29T19:06:32+05:30</lastmod>
   </url><url>
     <loc>/posts/</loc>
-    <lastmod>2025-07-15T22:29:25+05:30</lastmod>
+    <lastmod>2025-08-29T19:06:32+05:30</lastmod>
   </url><url>
     <loc>/tags/raspberry-pi/</loc>
-    <lastmod>2025-07-15T22:29:25+05:30</lastmod>
+    <lastmod>2025-08-29T19:06:32+05:30</lastmod>
   </url><url>
     <loc>/tags/rtems/</loc>
-    <lastmod>2025-07-15T22:29:25+05:30</lastmod>
+    <lastmod>2025-08-29T19:06:32+05:30</lastmod>
   </url><url>
     <loc>/tags/</loc>
-    <lastmod>2025-07-15T22:29:25+05:30</lastmod>
+    <lastmod>2025-08-29T19:06:32+05:30</lastmod>
   </url><url>
     <loc>/</loc>
+    <lastmod>2025-08-29T19:06:32+05:30</lastmod>
+  </url><url>
+    <loc>/posts/gsoc-midterm-evaluations/</loc>
     <lastmod>2025-07-15T22:29:25+05:30</lastmod>
   </url><url>
     <loc>/posts/gsoc-midterm-deliverables/</loc>

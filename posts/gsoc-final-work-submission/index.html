@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Gsoc Final Work Submission :: The SKD Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Project Proposal: https://docs.google.com/document/d/1NreikYpimpCXKtAVqa8RMzbgOyQgtGw7x1CQlPVAtJY/edit?usp=sharing
+Gitlab Activity: https://gitlab.rtems.org/users/skdatar/activity
+Project Issue: https://gitlab.rtems.org/rtems/programs/gsoc/-/issues/81
+Code contribution list: Merge Request Description I2C (Polling) Implemented polling-based I2C driver. I2C (Interrupt) Added TX interrupt support for I2C. PWM Support Implemented PWM driver, tested with logic analyzer &amp; audio jack. DMA Support Added standard DMA, DMA Lite &amp; DMA4 support (memory-to-memory). Docs (PWM) Documentation for PWM driver. Docs (DMA) Documentation for DMA driver. Header Guards Added C&#43;&#43; header guards to BSP header files. Formatting Fix (raspberrypi.h) Fixed formatting issues in include/bsp/raspberrypi.h. Docs (I2C) Documentation for I2C driver. Aim of the project The project aimed to have the support for I2C, PWM, DMA and Mailbox added to the Raspberry Pi 4b BSP.
+" />
+<meta name="keywords" content="GSoC 2025, RTEMS BSP, Raspberry Pi 4B, RTEMS device driver, I2C PWM DMA Mailbox RTEMS, Shaunak Datar GSoC" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="../../posts/gsoc-final-work-submission/" />
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="../../styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="../../images/blogfavicon.ico">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Gsoc Final Work Submission">
+<meta property="og:description" content="Project Proposal: https://docs.google.com/document/d/1NreikYpimpCXKtAVqa8RMzbgOyQgtGw7x1CQlPVAtJY/edit?usp=sharing
+Gitlab Activity: https://gitlab.rtems.org/users/skdatar/activity
+Project Issue: https://gitlab.rtems.org/rtems/programs/gsoc/-/issues/81
+Code contribution list: Merge Request Description I2C (Polling) Implemented polling-based I2C driver. I2C (Interrupt) Added TX interrupt support for I2C. PWM Support Implemented PWM driver, tested with logic analyzer &amp; audio jack. DMA Support Added standard DMA, DMA Lite &amp; DMA4 support (memory-to-memory). Docs (PWM) Documentation for PWM driver. Docs (DMA) Documentation for DMA driver. Header Guards Added C&#43;&#43; header guards to BSP header files. Formatting Fix (raspberrypi.h) Fixed formatting issues in include/bsp/raspberrypi.h. Docs (I2C) Documentation for I2C driver. Aim of the project The project aimed to have the support for I2C, PWM, DMA and Mailbox added to the Raspberry Pi 4b BSP.
+" />
+<meta property="og:url" content="/posts/gsoc-final-work-submission/" />
+<meta property="og:site_name" content="The SKD Blog" />
+
+  
+  
+  <meta property="og:image" content="/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-08-29 19:06:32 &#43;0530 IST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+</head>
+<body class="blue">
+
+
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="../../">
+  <div class="logo">
+    shaunak@datar:~$
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="../../posts">Posts</a></li>
+        
+      
+        
+          <li><a href="../../about">About</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+      
+        
+          <li><a href="../../posts" >Posts</a></li>
+        
+      
+        
+          <li><a href="../../about" >About</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="../../posts/gsoc-final-work-submission/">Gsoc Final Work Submission</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-08-29</time><span class="post-author">Shaunak Datar</span>
+    
+<span class="post-reading-time">3 min read (449 words)</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="../../tags/rtems/">RTEMS</a>&nbsp;
+      
+      #<a href="../../tags/gsoc/">GSoC</a>&nbsp;
+      
+      #<a href="../../tags/raspberry-pi/">Raspberry Pi</a>&nbsp;
+      
+      #<a href="../../tags/bare-metal/">Bare-metal</a>&nbsp;
+      
+      #<a href="../../tags/device-drivers/">Device-Drivers</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+
+  
+
+  <div class="post-content"><div>
+        <p>Project Proposal: <a href="https://docs.google.com/document/d/1NreikYpimpCXKtAVqa8RMzbgOyQgtGw7x1CQlPVAtJY/edit?usp=sharing">https://docs.google.com/document/d/1NreikYpimpCXKtAVqa8RMzbgOyQgtGw7x1CQlPVAtJY/edit?usp=sharing</a></p>
+<p>Gitlab Activity: <a href="https://gitlab.rtems.org/users/skdatar/activity">https://gitlab.rtems.org/users/skdatar/activity</a></p>
+<p>Project Issue: <a href="https://gitlab.rtems.org/rtems/programs/gsoc/-/issues/81">https://gitlab.rtems.org/rtems/programs/gsoc/-/issues/81</a></p>
+<h1 id="code-contribution-list">Code contribution list:<a href="#code-contribution-list" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<table>
+  <thead>
+      <tr>
+          <th>Merge Request</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/363">I2C (Polling)</a></td>
+          <td>Implemented polling-based I2C driver.</td>
+      </tr>
+      <tr>
+          <td><a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/682">I2C (Interrupt)</a></td>
+          <td>Added TX interrupt support for I2C.</td>
+      </tr>
+      <tr>
+          <td><a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/509">PWM Support</a></td>
+          <td>Implemented PWM driver, tested with logic analyzer &amp; audio jack.</td>
+      </tr>
+      <tr>
+          <td><a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/662">DMA Support</a></td>
+          <td>Added standard DMA, DMA Lite &amp; DMA4 support (memory-to-memory).</td>
+      </tr>
+      <tr>
+          <td><a href="https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/178">Docs (PWM)</a></td>
+          <td>Documentation for PWM driver.</td>
+      </tr>
+      <tr>
+          <td><a href="https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/186">Docs (DMA)</a></td>
+          <td>Documentation for DMA driver.</td>
+      </tr>
+      <tr>
+          <td><a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/665">Header Guards</a></td>
+          <td>Added C++ header guards to BSP header files.</td>
+      </tr>
+      <tr>
+          <td><a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/526">Formatting Fix (raspberrypi.h)</a></td>
+          <td>Fixed formatting issues in <code>include/bsp/raspberrypi.h</code>.</td>
+      </tr>
+      <tr>
+          <td><a href="https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/190">Docs (I2C)</a></td>
+          <td>Documentation for I2C driver.</td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="aim-of-the-project">Aim of the project<a href="#aim-of-the-project" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>The project aimed to have the support for I2C, PWM, DMA and Mailbox added to the Raspberry Pi 4b BSP.</p>
+<h2 id="i2c-support">I2C Support<a href="#i2c-support" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The I2C support was upstreamed in two separate MRs. One which implemented the Polling version.
+Another which added the TX Interrupt support to the driver.</p>
+<p>I2C was tested on the MPU6050 as well as the logic analyser</p>
+<p><img src="../../images/MPU6050_I2C.png" alt="MPU6050 using I2C"></p>
+<p><img src="../../images/I2C_LA.jpeg" alt="I2C on Logic analyser"></p>
+<p>Polling Merge Request: <a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/363">https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/363</a></p>
+<p>Interrupt Merge Request: <a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/682">https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/682</a></p>
+<h2 id="pwm-support">PWM Support<a href="#pwm-support" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The PWM support was added and was tested using a logic analyser
+<img src="../../images/PWM_Output.jpeg" alt="PWM Testing Output"></p>
+<p>PWM1_x channels are routed to the audio jack. PWM1 was then tested using the Audio Output on the RaspberryPi</p>
+<p>PWM Merge Request: <a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/509">https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/509</a></p>
+<h2 id="dma-support">DMA Support<a href="#dma-support" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The DMA Support was a very interesting part. During the coding period I could
+complete the memory-to-memory transfer.
+It involved a lot of cache management and handling control block structures.</p>
+<p>Apart for the standard DMA there are two other types of DMA: DMA Lite and DMA4</p>
+<p>All of these were tested for memory-to-memory transfer.</p>
+<p>The standard DMA test:
+<img src="../../images/DMA-std.png" alt="DMA Testing"></p>
+<p>DMA Lite test:
+<img src="../../images/DMA-Lite.png" alt="DMA Lite Testing"></p>
+<p>DMA4 test:
+<img src="../../images/DMA4.png" alt="DMA4 Testing"></p>
+<p>DMA Merge Request: <a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/662">https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/662</a></p>
+<h2 id="mailbox-support">Mailbox Support<a href="#mailbox-support" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Preliminary work on the Mailbox was started, though not completed in the coding period.</p>
+<h2 id="other-merged-mrs">Other Merged MRs<a href="#other-merged-mrs" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<ul>
+<li><a href="https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/186">Documentation for DMA</a></li>
+<li><a href="https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/178">Documentation for PWM</a></li>
+<li><a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/665">Adding C++ header guards for the BSPs header files</a></li>
+<li><a href="https://gitlab.rtems.org/rtems/rtos/rtems/-/merge_requests/526">Fix the formatting for the include/bsp/raspberrypi.h file</a></li>
+<li><a href="https://gitlab.rtems.org/rtems/docs/rtems-docs/-/merge_requests/190">Documentation for I2C</a></li>
+</ul>
+<h1 id="future-work">Future Work<a href="#future-work" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>There is considerable work to be done on the Raspberry Pi BSP. The support for Mailbox is incomplete,
+the sdhci support from GSoC 2024 still remains to be completed. The BSP could also use support for Ethernet and USB.</p>
+<p>I plan to continue working on the Raspberry Pi BSP in particular with RTEMS in general.</p>
+<h1 id="conclusion">Conclusion<a href="#conclusion" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>The time I dedicated to working on the Raspberry Pi BSP, helped me gain a deeper understanding
+of the architecture and the hardware. It sharpened my coding skills, helped me understand open-source.
+I would like to thank my mentor: Kinsey and Christian for putting in the time and effort, helping me understand good coding practices, understand the intricacies of the hardware and reviewing my MRs.
+A huge thank you to Google for connecting students and contributors like me to organisations like RTEMS.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="../../posts/gsoc-midterm-evaluations/">
+                <span class="button__text">GSoC Midterm evaluation</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/mirus-ua/hugo-theme-re-terminal" target="_blank">Theme</a> made by <a href="https://github.com/mirus-ua" target="_blank">Mirus</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="../../bundle.min.js"></script>
+
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
